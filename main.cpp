@@ -21,7 +21,7 @@ preguntándote si quieres seguir buscando después de cada una.
 #include <string>
 
 int main(){
-    std::string inputFile = "bitacora-1.txt";
+    std::string inputFile = "bitacora.txt";
     std::string outputFile = "bitacoraOrdenadaIP-Eq3.txt";
     BitacoraLinked bitacora(inputFile, outputFile); // se instancia BitacoraLinked para cargar y ordenar los datos de la bitacora
     bitacora.mergesort();
