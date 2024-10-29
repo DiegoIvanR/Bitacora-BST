@@ -1,10 +1,10 @@
 //g++ *.cpp -o salida.exe
 
 // Diego Ivan Rodriguez Nunez A01644772
-// Luis Andres Casillas Casillas A01645008
-// Ali Lopez Sarabia A01645060
+// Bernardo Santiago Marín A01638915
+// Monserrat Morales Cáñez A01638959
 // Act 2.3 - Act 2.3 - Actividad Integral estructura de datos lineales (Evidencia Competencia)
-// 09/10/2024
+
 // Programación de estructuras de datos y algoritmos fundamentales (Gpo 603)
 
 /*Este programa agarra un archivo de bitácora y mete sus registros en una lista enlazada. Luego, 
