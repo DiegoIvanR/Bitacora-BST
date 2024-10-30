@@ -36,55 +36,55 @@ bool MyBST::isEmpty(){
 }
 
 // O(logn)[si está balanceado] - busca recursivamente el dato, retorna si lo encuentra o no
-bool MyBST::search(int data, MyNodeBST *current){
+bool MyBST::search(int count, MyNodeBST *current){
     if(current == nullptr){ // caso base: no se encuentra en la hoja
         return false;
     }
-    if(current->data == data){ // caso base: si se encuentra en la hoja actual
+    if(current->count == count){ // caso base: si se encuentra en la hoja actual
         return true;
     } else{
-        current = data < current->data ? current->left : current->right; //operador ternario para buscar en el hijo derecho o izquierdo
+        current = count < current->count ? current->left : current->right; //operador ternario para buscar en el hijo derecho o izquierdo
     }
-    return search(data, current); // busca reursivamente
+    return search(count, current); // busca reursivamente
 }
 
 // O(logn)[arbol balanceado] - Funcion de preparacion para busqueda recursiva
-bool MyBST::search(int data){
-    return search(data, this->root); // comienza a buscar en la raiz
+bool MyBST::search(int count){
+    return search(count, this->root); // comienza a buscar en la raiz
 }
 
 //O(logn)[arbol balanceado] - true si lo inserto o no
-bool MyBST::insert(int data){
+bool MyBST::insert(string ip, int count){
     MyNodeBST* current = this->root; // comienza con la raiz
     if(current == nullptr){
-        this->root = new MyNodeBST(data); // si no hay raiz (nullptr), insertar en la raiz
+        this->root = new MyNodeBST(count, ip); // si no hay raiz (nullptr), insertar en la raiz
         this->size++;
         return true; // insercion exitosa
     }
     while(true){ // recorre iterativamente hasta llegar a la hoja donde se deberia insertar
         // si ya existe, retornar falso
-        if (current->data == data){ 
-            MyNodeBST* node = new MyNodeBST(data);
+        if (current->count == count){ 
+            MyNodeBST* node = new MyNodeBST(count, ip);
             node->right = current->right;
             current->right = node;
             return true;
         }  
         // si el padre no tiene a la hoja del dato, insertar el dato
-        else if (current->left == nullptr && data < current->data){
-            MyNodeBST* leaf = new MyNodeBST(data);
+        else if (current->left == nullptr && count < current->count){
+            MyNodeBST* leaf = new MyNodeBST(count, ip);
             current->left = leaf;
             this->size++;
             return true;
         } 
         // si el padre no tiene a la hoja del dato, insertar el dato
-        else if (current->right == nullptr && data > current->data){
-            MyNodeBST* leaf = new MyNodeBST(data);
+        else if (current->right == nullptr && count > current->count){
+            MyNodeBST* leaf = new MyNodeBST(count, ip);
             current->right = leaf;
             this->size++;
             return true;
         } else{
             // de no haber llegado a una capa antes de las hojas o encontrar el dato, seguir buscando
-            current = data < current->data ? current->left : current->right; //operador ternario
+            current = count < current->count ? current->left : current->right; //operador ternario
         }
     }
 }
@@ -95,7 +95,7 @@ void MyBST::preorder(MyNodeBST* current){
         return;
     }
     else{
-        cout<<current->data<<","; // imprimir el actual
+        cout<<current->count<<","; // imprimir el actual
         preorder(current->left); // recorrer rama izquierda
         preorder(current->right); // recorrer rama derecha
     }
@@ -112,9 +112,12 @@ void MyBST::inorder(MyNodeBST* current){
     if(current == nullptr){ // caso base, se llego al final de la rama
         return;
     } else{
-        inorder(current->right); // recorrer la rama izquierda
-        cout<<current->data<<","; // imprimir el actual
-        inorder(current->left); // recorrer la rama derecha
+        // En esta sección, recorremos primero la rama derecha 
+        // y después la izquierda para que los datos salgan ordenados de 
+        // mayor a menor (porque deseamos imprimir las IPs con más repeticiones)
+        inorder(current->right); // recorrer la rama derecha
+        cout<<current->count<<","; // imprimir el actual
+        inorder(current->left); // recorrer la rama izquierda
     }
 }
 
@@ -131,7 +134,7 @@ void MyBST::postorder(MyNodeBST* current){
     } else{
         postorder(current->left); // recorrer la rama izquierda
         postorder(current->right); // recorrer la rama derecha
-        cout<<current->data<<","; // imprimir el actual
+        cout<<current->count<<","; // imprimir el actual
     }
 }
 
@@ -142,33 +145,33 @@ void MyBST::postorder(){
 }
 
 // O(logn)[arbol balanceado] - imprime los ancestros del valor pasado separados por comas y sin dejar espacios entre ellos.
-void MyBST::ancestors(int data){
+void MyBST::ancestors(int count){
     MyNodeBST* current = this->root; // comienza en la raiz
     string anc = ""; // string para almacenar los datos de los ancestros
     while(current!=nullptr){ // si se llega al final, terminar y no imprimir nada
-        if (current->data == data){ // si el dato se encuentra, imprimir los ancestros
-            cout<<anc + to_string(current->data) + ","<<endl;
+        if (current->count == count){ // si el dato se encuentra, imprimir los ancestros
+            cout<<anc + to_string(current->count) + ","<<endl;
             break;
         }
         else{ // agregar el valor actual (posible ancestro) y buscar iterativamente el dato
-            anc = anc + to_string(current->data) + ",";
-            current = data < current->data ? current->left : current->right; //operador ternario
+            anc = anc + to_string(current->count) + ",";
+            current = count < current->count ? current->left : current->right; //operador ternario
         }
     }
 }
 
 // O(logn) [arbol balanceado] - regresa el nivel en que se encuentra el valor
-int MyBST::whatLevelAmI(int data){
+int MyBST::whatLevelAmI(int count){
     MyNodeBST* current = this->root; // comienza en la raiz
     int tmpLevel = 0; // contador temporal de nivel
     while(current!=nullptr){
-        if (current->data == data){ // si se encuentra el dato
+        if (current->count == count){ // si se encuentra el dato
             return tmpLevel;        // regresar el nivel actual
             break;
         }
         else{ // si aun no se encuentra el dato, buscar iterativamente y aumentar el nivel
             tmpLevel++;
-            current = data < current->data ? current->left : current->right; //operador ternario
+            current = count < current->count ? current->left : current->right; //operador ternario
         }
     }
     return -1; // no se encontro el dato
@@ -187,7 +190,7 @@ void MyBST::level() {
 
     for (int i = 0; i < this->size; i++) {
         current = array[i];
-        cout << current->data << ","; // imprime el nodo actual
+        cout << current->count << ","; // imprime el nodo actual
 
         // de tener un hijo izquierdo, lo agrega al array para imprimirlo despues
         if (current->left != nullptr) {
@@ -208,15 +211,15 @@ void MyBST::level() {
 
 // Inspirado en el libro Estructuras de datos y algoritmos fundamentales por Salinas, G. González, L. de la Cueva, V.
 // O(logn)[si está balanceado] - borra el nodo del dato especificado
-MyNodeBST* MyBST::remove(MyNodeBST* current, int data){
+MyNodeBST* MyBST::remove(MyNodeBST* current, int count){
     if(current == nullptr){  // caso base, no se modifica nada
         return nullptr;
-    } else if (data<current->data){ // busca el dato a eliminar a la izquierda
+    } else if (count<current->count){ // busca el dato a eliminar a la izquierda
         // cuando se elimina un nodo, esta linea nos ayuda a asignar el nuevo hijo, sino, se mantiene igual
-        current->left = remove(current->left, data);
-    } else if (data>current->data){ // busca el dato a eleminar a la derecha
+        current->left = remove(current->left, count);
+    } else if (count>current->count){ // busca el dato a eleminar a la derecha
         // cuando se elimina un nodo, esta linea nos ayuda a asignar el nuevo hijo, sino, se mantiene igual
-        current->right = remove(current->right, data);
+        current->right = remove(current->right, count);
     } else { // si se encuentra el dato a eliminar
         MyNodeBST* tmp = current;
         if(tmp->left == nullptr){
@@ -244,7 +247,7 @@ MyNodeBST* MyBST::replace(MyNodeBST* deleteNode){
         parentRight = mostRight; // actualiza los apuntadores
         mostRight = mostRight->right;
     }
-    deleteNode->data = mostRight->data; // reemplazamos el dato del nodo a eliminar con el nodo del mayor de los menores
+    deleteNode->count = mostRight->count; // reemplazamos el dato del nodo a eliminar con el nodo del mayor de los menores
     if(parentRight == deleteNode){ // si el nodo a eliminar solo tenia un hijo a la izquierda, y de ese ninguno a la derecha
         parentRight->left = mostRight->left; // apuntar a los nodos de la izquierda, pues no hay nodos a la derecha de ese
     } else{
@@ -259,13 +262,13 @@ MyNodeBST* MyBST::replace(MyNodeBST* deleteNode){
 // y search se realiza antes de remove recursivo, no adentro de,
 // la complejidad de bool remove se queda con el mayor de ambos
 // y, al ser la misma, queda O(logn)
-bool MyBST::remove(int data){
-    if(!search(data)){ // busca el dato
+bool MyBST::remove(int count){
+    if(!search(count)){ // busca el dato
         return false; // si no esta, no lo puede borrar
     }
     
     this->size--; // reduce la cuenta de nodos que hay
-    remove(this->root, data); // remover el nodo de forma iterativa
+    remove(this->root, count); // remover el nodo de forma iterativa
     return true; // si el dato si se encontraba, siempre lo elimina
 }
 
