@@ -16,11 +16,13 @@ preguntándote si quieres seguir buscando después de cada una.
 */
 
 #include "BitacoraLinked.h"
+#include "MyBST.h"
 #include <iostream>
 #include <limits>
 #include <string>
 
 int main(){
+    MyBST bst;
     std::string inputFile = "bitacora.txt";
     std::string outputFile = "bitacoraOrdenadaIP-Eq3.txt";
     BitacoraLinked bitacora(inputFile, outputFile); // se instancia BitacoraLinked para cargar y ordenar los datos de la bitacora
