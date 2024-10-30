@@ -34,7 +34,7 @@ void BitacoraLinked::fileToVector(){
 }
 
 // este metodo recorre la lista enlazada y escribe cada uno de sus elementos en el archivo
-void BitacoraLinked::vectorToFile(){
+void BitacoraLinked::listToFile(){
     std::ofstream outFile(this->outputFile); 
     if (!outFile) { 
         std::cerr << "Error creating file!" << std::endl;

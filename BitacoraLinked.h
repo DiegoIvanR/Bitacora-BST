@@ -30,7 +30,7 @@ class BitacoraLinked{
     
     public:
     BitacoraLinked(string inputFile, string outputFile);
-    void vectorToFile(); // O(n)
+    void listToFile(); // O(n)
     void ipToFile(string ipInicio, string ipFin, string ArchivoBusqueda); // O(n)
     void mergesort(); // O(nlog(n))
     

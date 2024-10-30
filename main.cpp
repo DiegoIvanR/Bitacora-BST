@@ -25,8 +25,12 @@ int main(){
     std::string outputFile = "bitacoraOrdenadaIP-Eq3.txt";
     BitacoraLinked bitacora(inputFile, outputFile); // se instancia BitacoraLinked para cargar y ordenar los datos de la bitacora
     bitacora.mergesort();
-    bitacora.vectorToFile();
+    bitacora.listToFile();
     std::string ipInicio, ipFin;
+
+    // Pedir al usuario que ingrese las IPs de inicio y fin
+    // Comentar desde aquí para deshabilitar
+     /*
 
     int count = 1; 
     char otraBusqueda;
@@ -46,5 +50,10 @@ int main(){
         std::cout << " Quieres realizar otra busqueda de IP? (Y/N): ";    // pregunta al usuario si quiere hacer otra búsqueda
         std::cin >> otraBusqueda;
     }
+
+    // Fin búsqueda de IPs
+     */ 
+
+     // Buscar las IPs con más frecuencia en la Bitácora ordenada
     return 0;
 }
