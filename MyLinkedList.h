@@ -8,6 +8,7 @@
 #ifndef MYLINKEDLIST_H
 #define MYLINKEDLIST_H
 #include <iostream>
+#include <sstream>
 using namespace std;
 
 struct MyNodoLL {
@@ -19,6 +20,18 @@ struct MyNodoLL {
         this->next = next;
     }
     MyNodoLL(string data): MyNodoLL(data, nullptr) {}
+
+    string getIp() {
+        stringstream ss(this->data);
+        string line;
+
+        getline(ss, line, ' ');
+        getline(ss, line, ' ');
+        getline(ss, line, ' ');
+        getline(ss, line, ':');
+        
+        return line;
+    }
 };
 
 class MyLinkedList {

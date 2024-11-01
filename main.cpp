@@ -32,7 +32,7 @@ int main(){
 
     // Pedir al usuario que ingrese las IPs de inicio y fin
     // Comentar desde aquí para deshabilitar
-     /*
+    //*
 
     int count = 1; 
     char otraBusqueda;
@@ -54,8 +54,14 @@ int main(){
     }
 
     // Fin búsqueda de IPs
-     */ 
+    //*/ 
 
-     // Buscar las IPs con más frecuencia en la Bitácora ordenada
+    // Buscar las IPs con más frecuencia en la Bitácora ordenada
+    // Construir el BST con la frecuencia y la IP
+    
+    bst = bitacora.listToBST();
+    int ipsMasFrecuentes = 7;
+    bst.inorder(ipsMasFrecuentes);
+
     return 0;
 }

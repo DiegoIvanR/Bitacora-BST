@@ -62,7 +62,6 @@ bool MyBST::insert(string ip, int count){
         return true; // insercion exitosa
     }
     while(true){ // recorre iterativamente hasta llegar a la hoja donde se deberia insertar
-        // si ya existe, retornar falso
         if (current->count == count){ 
             MyNodeBST* node = new MyNodeBST(count, ip);
             node->right = current->right;
@@ -108,22 +107,25 @@ void MyBST::preorder(){
 }
 
 // O(n) - imprime los datos del arbol(izquierda-actual-derecha)
-void MyBST::inorder(MyNodeBST* current){
+void MyBST::inorder(MyNodeBST* current, int &count, int maxNodes){
     if(current == nullptr){ // caso base, se llego al final de la rama
         return;
     } else{
         // En esta sección, recorremos primero la rama derecha 
         // y después la izquierda para que los datos salgan ordenados de 
         // mayor a menor (porque deseamos imprimir las IPs con más repeticiones)
-        inorder(current->right); // recorrer la rama derecha
-        cout<<current->count<<","; // imprimir el actual
-        inorder(current->left); // recorrer la rama izquierda
+        inorder(current->right, count, maxNodes); // recorrer la rama derecha
+        if (count >= maxNodes) return;
+        cout<<current->ip << " (" << current->count << ") repeticiones" << ", "; // imprimir el actual
+        count++;
+        inorder(current->left, count, maxNodes); // recorrer la rama izquierda
     }
 }
 
 // O(n) - funcion de preparacion para imprimr el arbol recursivamente
-void MyBST::inorder(){
-    inorder(this->root);
+void MyBST::inorder(int maxNodes){
+    int count = 0;
+    inorder(this->root, count, maxNodes);
     cout<<endl;
 }
 
@@ -280,7 +282,7 @@ void MyBST::visit(int type){
             preorder(); // recorre el arbol en preorden
             break;
         case 2:
-            inorder(); // recorre el arbol en inorden
+            inorder(this->size); // recorre el arbol en inorden
             break;
         case 3:
             postorder(); // recorre el arbol en postorden

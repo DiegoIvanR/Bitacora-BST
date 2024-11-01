@@ -11,6 +11,7 @@
 #include <string>
 #include <iomanip>
 #include "MyLinkedList.h"
+#include "MyBST.h"
 using namespace std;
 
 // La clase BitacoraLinked maneja una bitácora almacenada en una lista enlazada (MyLinkedList)
@@ -18,7 +19,6 @@ using namespace std;
 // guardar los datos de la lista en un archivo (vectorToFile), buscar y extraer registros
 // dentro de un rango de IPs (ipToFile), y ordenar la bitácora con MergeSort (mergesort)
 // Toda la gestión de los datos se hace usando la clase MyLinkedList.
-
 
 
 class BitacoraLinked{
@@ -33,7 +33,7 @@ class BitacoraLinked{
     void listToFile(); // O(n)
     void ipToFile(string ipInicio, string ipFin, string ArchivoBusqueda); // O(n)
     void mergesort(); // O(nlog(n))
-    
+    MyBST listToBST(); // O(n)
 };
 
 

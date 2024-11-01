@@ -32,7 +32,7 @@ class MyBST{
         MyNodeBST* root; // Nodo raiz
         bool search(int count,MyNodeBST* current); // O(logn)[si está balanceado] - busca recursivamente el dato, retorna si lo encuentra o no
         void preorder(MyNodeBST* current); // O(n) - imprime los datos del arbol (actual-izquierda-derecha)
-        void inorder(MyNodeBST* current); // O(n) - imprime los datos del arbol(izquierda-actual-derecha)
+        void inorder(MyNodeBST* current, int &count, int maxNodes); // O(n) - imprime los datos del arbol(izquierda-actual-derecha), definiendo un límite de nodos a recorrer
         void postorder(MyNodeBST* current); // O(n) - imprime los datos del (izquierda-derecha-actual)
         
         int height(MyNodeBST* current); // O(n) - regresa la altura maxima del arbol
@@ -52,7 +52,7 @@ class MyBST{
         //Estudiar borrado en BST
         //Estudiar AVL
         void preorder(); // O(n) - funcion de preparacion para imprimr el arbol recursivamente
-        void inorder(); // O(n) - funcion de preparacion para imprimr el arbol recursivamente
+        void inorder(int maxNodes); // O(n) - funcion de preparacion para imprimr el arbol recursivamente, definiendo un límite de nodos.
         void postorder(); // O(n) - funcion de preparacion para imprimr el arbol recursivamente
         void level(); // O(n) - imprime el arbol a lo BFS (por niveles) de manera iterativo
         void visit(int type);//Type: 1->preorder,2->inorder.3->postorder,4->level

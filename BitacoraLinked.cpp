@@ -61,3 +61,27 @@ void BitacoraLinked::ipToFile(std::string ipInicio, std::string ipFin, std::stri
 void BitacoraLinked::mergesort(){
     BitacoraLinkedList.mergesort();
 }
+
+MyBST BitacoraLinked::listToBST(){
+    MyBST bst;
+    MyNodoLL* current = BitacoraLinkedList.head;
+    string lastIP = current->getIp();
+    int count = 0;
+
+    while (current != nullptr) {
+        // Si el actual coincide con el último visto,
+        // aumentar el contador
+        if (current->getIp() == lastIP) {
+            count++;
+        }
+        // De lo contrario, significa que nos movimos a la siguiente ip
+        // Crear un nuevo contador 
+        else {
+            bst.insert(lastIP, count);
+            lastIP = current->getIp();
+            count = 1;
+        }
+        current=current->next;
+    }
+    return bst;
+}
