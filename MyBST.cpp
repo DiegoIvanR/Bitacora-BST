@@ -62,6 +62,9 @@ bool MyBST::insert(string ip, int count){
         return true; // insercion exitosa
     }
     while(true){ // recorre iterativamente hasta llegar a la hoja donde se deberia insertar
+        // Si el dato ya existe, insertar a la derecha
+        // Esto garantiza que multiples frecuencias iguales se impriman con la
+        // misma prioridad. 
         if (current->count == count){ 
             MyNodeBST* node = new MyNodeBST(count, ip);
             node->right = current->right;

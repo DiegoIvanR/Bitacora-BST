@@ -264,24 +264,15 @@ void MyLinkedList::mergesort() {
 }
 
 string MyLinkedList::extractIPandPort(const string& data) {
-    int start = 15;  // La IP siempre comienza en la posición 15
-    if (data[start] == ' ') {
-        start++;
-    }
-    int end = data.find(" ", start);  // Encuentra el final de la IP (antes de los dos puntos)
-    if (end == string::npos) {
-        end = data.find(" ", start);
-    }
+    stringstream ss(data);
+    string line;
 
-    // Extrae la subcadena que contiene la IP
-    string ip = data.substr(start, end - start);
+    getline(ss, line, ' '); // Mes 
+    getline(ss, line, ' '); // Día
+    getline(ss, line, ' '); // Hora
+    getline(ss, line, ' '); // Ip
 
-    // Elimina espacios iniciales si existen
-    if (!ip.empty() && ip[0] == ' ') {
-        ip.erase(0, 1);
-    }
-
-    return ip;  // Retorna la IP limpia
+    return line;  // Retorna la Ip limpia
 }
 
 string MyLinkedList::extractIP(const string& data) {
