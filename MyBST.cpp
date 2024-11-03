@@ -119,7 +119,7 @@ void MyBST::inorder(MyNodeBST* current, int &count, int maxNodes){
         // mayor a menor (porque deseamos imprimir las IPs con más repeticiones)
         inorder(current->right, count, maxNodes); // recorrer la rama derecha
         if (count >= maxNodes) return;
-        cout<<current->ip << " (" << current->count << ") repeticiones" << ", "; // imprimir el actual
+        cout<<current->ip << " " << current->count << endl; // imprimir el actual
         count++;
         inorder(current->left, count, maxNodes); // recorrer la rama izquierda
     }
@@ -129,7 +129,6 @@ void MyBST::inorder(MyNodeBST* current, int &count, int maxNodes){
 void MyBST::inorder(int maxNodes){
     int count = 0;
     inorder(this->root, count, maxNodes);
-    cout<<endl;
 }
 
 // O(n) - imprime los datos del (izquierda-derecha-actual)
